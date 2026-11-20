@@ -35,6 +35,10 @@ jobs:
         run: |
           sed -i '/^android {/a\    packaging {\n        resources {\n            excludes += ["/META-INF/LICENSE.md", "/META-INF/NOTICE.md"]\n        }\n    }' app/build.gradle
 
+      - name: Fix Java Message conflict
+        run: |
+          sed -i 's/\bMessage\b/javax.mail.Message/g' app/src/main/java/com/xvr/mail/MainActivity.java
+
       - name: Build APK
         run: gradle --no-daemon assembleDebug
 
