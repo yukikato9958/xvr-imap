@@ -37,7 +37,10 @@ jobs:
 
       - name: Fix Java Message conflict
         run: |
-          sed -i 's/\bMessage\b/javax.mail.Message/g' app/src/main/java/com/xvr/mail/MainActivity.java
+          FILE=app/src/main/java/com/xvr/mail/MainActivity.java
+          sed -i 's/\bMessage\b/javax.mail.Message/g' "$FILE"
+          sed -i 's/m\.isSet(Flags\.Flag\.SEEN)/isSeen(m)/g' "$FILE"
+          sed -i '/private void load(boolean doSearch)/i\ private boolean isSeen(javax.mail.Message m){try{return m.isSet(Flags.Flag.SEEN);}catch(Exception e){return false;}}' "$FILE"
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
