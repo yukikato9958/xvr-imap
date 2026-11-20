@@ -1,0 +1,27 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.xvr.mail'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.xvr.mail'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+
+    packaging {
+        resources {
+            excludes += '/META-INF/LICENSE.md'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.sun.mail:android-mail:1.6.7'
+    implementation 'com.sun.mail:android-activation:1.6.7'
+}
