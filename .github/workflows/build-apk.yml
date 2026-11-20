@@ -1,3 +1,4 @@
+
 name: Build XVR APK
 
 on:
@@ -30,9 +31,9 @@ jobs:
           unzip -o XVR-Android-Project.zip
           cp -a XVR-Android/. .
 
-      - name: Fix duplicate license
+      - name: Fix duplicate licenses
         run: |
-          sed -i '/^android {/a\    packaging {\n        resources {\n            excludes += "/META-INF/LICENSE.md"\n        }\n    }' app/build.gradle
+          sed -i '/^android {/a\    packaging {\n        resources {\n            excludes += ["/META-INF/LICENSE.md", "/META-INF/NOTICE.md"]\n        }\n    }' app/build.gradle
 
       - name: Build APK
         run: gradle --no-daemon assembleDebug
